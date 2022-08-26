@@ -72,6 +72,36 @@ namespace EdabitChalanges
             }
             return stack.Count == 0;
         }
-        
+
+        public static int[] TwoSum(int[] nums, int target)
+        {
+            Dictionary<int, int> hash = new Dictionary<int, int>();
+            int[] response = new int[2];
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int reminder = target - nums[i];
+                if (hash.ContainsKey(nums[i]))
+                {
+                    response[0] = hash[nums[i]]; 
+                    response[1] = i;
+                    i = nums.Length;
+                }
+                else if (!hash.ContainsKey(reminder))
+                    hash.Add(reminder, i);
+            }
+            return response;
+        }
+
+        //https://leetcode.com/problems/power-of-three/
+        public bool IsPowerOfThree(int n)
+        {
+            if (n <= 0) return false;
+            if (n % 3 == 0)
+                return IsPowerOfThree(n / 3);
+
+            return n == 1 ? true : false;
+        }
+
     }
 }

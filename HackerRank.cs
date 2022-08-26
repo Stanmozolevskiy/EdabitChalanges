@@ -511,6 +511,85 @@ namespace EdabitChalanges
             }
             return answers;
         }
+
+
+        public static SinglyLinkedListNode reverse(SinglyLinkedListNode llist)
+        {
+            if (llist == null || llist.next == null) return llist;
+
+            SinglyLinkedListNode result = null;
+            SinglyLinkedListNode current = llist;
+            SinglyLinkedListNode previous = null;
+
+            while(current != null)
+            {
+                previous = current;
+                current = current.next;
+                previous.next = result;
+                result = previous;
+            }
+            return result;
+
+        }
+        public class SinglyLinkedListNode
+        {
+            public int data;
+            public SinglyLinkedListNode next;
+        }
+
+
+        public static string BalancedSums(List<int> arr)
+        {
+            if (arr.Count == 1) return "YES";
+            int totalSum = arr.Aggregate((a,b) => a+b);
+            int rightSum = 0;
+
+            for (int i = arr.Count - 1; i >= 0; i--)
+            {
+                rightSum += arr[i];
+                if (i != 0 && (totalSum - arr[i - 1] - rightSum) == rightSum) return "YES";
+            }
+            return "NO";
+        }
+
+        //https://www.hackerrank.com/challenges/three-month-preparation-kit-misere-nim-1/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-six&h_r=next-challenge&h_v=zen
+        public static String misereNim(List<int> s)
+        {
+            bool allIsOne = true;
+            foreach (int i in s)
+                if (i != 1)
+                {
+                    allIsOne = false;
+                    break;
+                }
+            
+            int res = s.Aggregate((x, y)=> (x ^ y));
+
+            if (allIsOne)
+            {
+                if (s.Count % 2 == 0) return "First";
+                else return "Second";
+            }
+           
+            else if (res == 0) return "Second";
+            else return "First";
+        }
+
+        //https://www.hackerrank.com/challenges/three-month-preparation-kit-an-interesting-game-1/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-six
+        public static string GamingArray(List<int> arr)
+        {
+            int peaks = 1;
+            int lastPeakHigh = arr[0];
+
+            for (int i = 1; i < arr.Count; i++)
+                if (arr[i] > lastPeakHigh)
+                {
+                    lastPeakHigh = arr[i];
+                    peaks++;
+                }
+
+            return peaks % 2 == 0 ? "ANDY" : "BOB";
+        }
     }
 }
 
