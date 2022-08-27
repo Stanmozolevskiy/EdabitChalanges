@@ -590,6 +590,55 @@ namespace EdabitChalanges
 
             return peaks % 2 == 0 ? "ANDY" : "BOB";
         }
+
+        //https://www.hackerrank.com/challenges/three-month-preparation-kit-magic-square-forming/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-six
+        public static int FormingMagicSquare(List<List<int>> s)
+        {
+            List<List<int>> magic = new List<List<int>> {
+                new List<int> {8, 1, 6, 3, 5, 7, 4, 9, 2},
+                new List<int> {6, 1, 8, 7, 5, 3, 2, 9, 4},
+                new List<int> {4, 9, 2, 3, 5, 7, 8, 1, 6},
+                new List<int> {2, 9, 4, 7, 5, 3, 6, 1, 8},
+                new List<int> {8, 3, 4, 1, 5, 9, 6, 7, 2},
+                new List<int> {4, 3, 8, 9, 5, 1, 2, 7, 6},
+                new List<int> {2, 7, 6, 9, 5, 1, 4, 3, 8},
+                new List<int> {6, 7, 2, 1, 5, 9, 8, 3, 4}};
+
+
+            List<int> flatList = new List<int>();
+            foreach (var oneList in s)
+                foreach (int num in oneList)
+                    flatList.Add(num);
+
+            int response = int.MaxValue;
+
+            foreach (var term in magic)
+            {
+                int temp = getCost(term, flatList);
+                if (response > temp)
+                    response = temp;
+            }
+            return response;
+        }
+
+        private static int getCost(List<int> magic, List<int> data)
+        {
+            int sum = 0;
+            for (int i = 0; i < data.Count; i++)
+                if (data[i] != magic[i])
+                    sum += Math.Abs(data[i] - magic[i]);
+            return sum;
+        }
+
+        public static int SuperDigit(string n, int k)
+        {
+            long sum = (long)n.Select(char.GetNumericValue).Sum() * k;
+
+            while (sum > 10)
+                sum = (long)sum.ToString().Select(char.GetNumericValue).Sum();
+
+            return (int)sum;
+        }
     }
 }
 
