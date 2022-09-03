@@ -10,7 +10,7 @@ namespace EdabitChalanges
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(HackerRank.SuperDigit("12345", 5));
+           Console.WriteLine(HackerRank.IsValid("aabbcd"));
         }
     }
 

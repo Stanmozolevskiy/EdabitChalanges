@@ -639,6 +639,119 @@ namespace EdabitChalanges
 
             return (int)sum;
         }
+
+        public static string CounterGame(long n)
+        {
+           
+            return Convert.ToString(n - 1, 2).Select(x => x == '1').Count() % 2 == 0 ? "Louise" : "Richard";
+        }
+
+        public static long SumXor(long n)
+        {
+            if (n == 0) return 1;
+
+            int zeroCount = 0;
+            string binary = Convert.ToString(n, 2);
+            for (int i = 0; i < binary.Length; i++)
+            {
+                if (binary[i] == '0')
+                    zeroCount++;
+                
+            }
+            return (long)Math.Pow(2, zeroCount);
+        }
+
+        //https://www.hackerrank.com/challenges/three-month-preparation-kit-new-year-chaos/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-seven
+        public static void MinimumBribes(List<int> q)
+        {
+            int bribes = 0;
+            var (p1, p2, p3) = (1, 2, 3);
+            for(int i = 0; i< q.Count; i++)
+            {
+                if (q[i] == p1)
+                {
+                    p1 = p2;
+                    p2 = p3;
+                    p3++;
+                }
+                else if (q[i] == p2)
+                {
+                    bribes++;
+                    p2 = p3;
+                    p3++;
+                }
+                else if (q[i] == p3)
+                {
+                    bribes += 2;
+                    p3++;
+                }
+                else
+                {
+                    Console.WriteLine("Too chaotic");
+                    return;
+                }
+            }
+            Console.WriteLine(bribes);
+        }
+
+
+        //
+        public static int Pylons(int k, List<int> arr)
+        {
+            int diameter = (k - 1) * 2 + 1;
+            int plants = 0;
+            int i = k - 1;
+            while (true)
+            {
+                while (arr[i] == 0)
+                {
+                    i--;
+                    if (i < 0 || arr[i] == 2) return -1;
+                }
+                arr[i] = 2;
+                plants++;
+                if (i + k > arr.Count - 1) return plants;
+                i = Math.Min(arr.Count - 1, i + diameter);
+            }
+        }
+
+        //https://www.hackerrank.com/challenges/three-month-preparation-kit-sherlock-and-valid-string/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-seven&h_r=next-challenge&h_v=zen
+        public static string IsValid(string s)
+        {
+            Dictionary<char, int> hash = new Dictionary<char, int>();
+           
+            foreach (char letter in s.ToCharArray())
+                if (hash.ContainsKey(letter))
+                    hash[letter]++;
+                else hash.Add(letter, 1);
+
+
+            List<int> values = hash.Values.ToList();
+            values.Sort();
+
+            if(values.Count == 1)
+                return "YES";
+
+            int first = values[0];
+            int second = values[1];
+            int secondLast = values[values.Count -2];
+            int last = values[values.Count -1];
+
+            if (first == last) return "YES";
+
+            if (first == 1 && second == last) return "YES";
+
+            if (first == second && second == secondLast && secondLast == (last - 1)) return "YES";
+
+            return "NO";
+        }
+
+        ////https://www.hackerrank.com/challenges/three-month-preparation-kit-climbing-the-leaderboard/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-seven&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen
+        //public static List<int> climbingLeaderboard(List<int> ranked, List<int> player)
+        //{
+
+        //}
+
     }
 }
 
