@@ -746,11 +746,51 @@ namespace EdabitChalanges
             return "NO";
         }
 
-        ////https://www.hackerrank.com/challenges/three-month-preparation-kit-climbing-the-leaderboard/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-seven&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen
-        //public static List<int> climbingLeaderboard(List<int> ranked, List<int> player)
-        //{
+        //https://www.hackerrank.com/challenges/three-month-preparation-kit-climbing-the-leaderboard/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-seven&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen
+        public static List<int> ClimbingLeaderboard(List<int> ranked, List<int> player)
+        {
+            List<int> distinct = ranked.Distinct().ToList();
+            distinct.Sort();
+            int i = 0;
+            int n = distinct.Count;
+            List<int> results = new List<int>();
+           
+            foreach(int score in player)
+            {
+                while (i<n && distinct[i] <= score)
+                    i = i + 1;
+                results.Add(n - i + 1);
+            }
 
-        //}
+            return results;
+        }
+        
+        public class DoublyLinkedListNode
+        {
+            public int data;
+            public DoublyLinkedListNode next;
+            public DoublyLinkedListNode prev;
+        }
+       
+
+        //https://www.hackerrank.com/challenges/three-month-preparation-kit-reverse-a-doubly-linked-list/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-seven
+        public static DoublyLinkedListNode Reverse(DoublyLinkedListNode llist)
+        {
+            DoublyLinkedListNode prev = null;
+            DoublyLinkedListNode next = null;
+            DoublyLinkedListNode current = llist;
+
+            while(current != null)
+            {
+                next = current.next;
+                current.next = prev;
+                current.prev = next;
+                prev = current;
+                current = next;
+            }
+            current = prev;
+            return current;
+        }
 
     }
 }
