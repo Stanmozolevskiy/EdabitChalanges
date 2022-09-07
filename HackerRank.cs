@@ -515,28 +515,25 @@ namespace EdabitChalanges
 
         public static SinglyLinkedListNode reverse(SinglyLinkedListNode llist)
         {
-            if (llist == null || llist.next == null) return llist;
-
-            SinglyLinkedListNode result = null;
+            SinglyLinkedListNode prev = null;
+            SinglyLinkedListNode next = null;
             SinglyLinkedListNode current = llist;
-            SinglyLinkedListNode previous = null;
 
             while(current != null)
             {
-                previous = current;
-                current = current.next;
-                previous.next = result;
-                result = previous;
+                next = current;
+                current.next = prev;
+                prev = current;
+                current = next;
             }
-            return result;
-
+            current = prev;
+            return current;
         }
         public class SinglyLinkedListNode
         {
             public int data;
             public SinglyLinkedListNode next;
         }
-
 
         public static string BalancedSums(List<int> arr)
         {
@@ -790,6 +787,69 @@ namespace EdabitChalanges
             }
             current = prev;
             return current;
+        }
+
+        //https://www.hackerrank.com/challenges/three-month-preparation-kit-insert-a-node-at-a-specific-position-in-a-linked-list/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-seven
+        public static SinglyLinkedListNode insertNodeAtPosition(SinglyLinkedListNode llist, int data, int position)
+        {
+            SinglyLinkedListNode newNode = new SinglyLinkedListNode()
+            {
+                data = data,
+                next = null
+            };
+
+            SinglyLinkedListNode current = llist;
+            int count = 0;
+            while(position != count){
+                current = current.next;
+                count ++;
+                }
+            var holder = current.next;
+            current.next = newNode;
+                newNode.next = holder;
+        
+            return current;
+        }
+
+        //https://www.hackerrank.com/challenges/three-month-preparation-kit-merge-two-sorted-linked-lists/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-eight
+        static SinglyLinkedListNode mergeLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2)
+        {
+
+            // create dummy node to avoid edge case of inserting into empty list;
+            SinglyLinkedListNode dummy = new SinglyLinkedListNode();
+            SinglyLinkedListNode tail = dummy;
+
+            // check each node and compare the values and store them in a new llist
+            while(head1 != null && head2 != null)
+            {
+                if (head1.data < head2.data)
+                {
+                    tail.next = head1;
+                    head1 = head1.next;
+                }
+                else
+                {
+                    tail.next = head2;
+                    head2 = head2.next;
+                }
+                tail = tail.next;
+            }
+            //if one of the list have remaining elements add those up
+            if (head1 != null)
+                tail.next = head1;
+            else if (head2 != null)
+                tail.next = head2;
+
+            return dummy.next;
+        }
+      
+        private static SinglyLinkedListNode breakLlist(SinglyLinkedListNode head, int val)
+        {
+            var firstPart = head;
+            while (firstPart.next != null && firstPart.next.data < val)
+                firstPart = firstPart.next;
+
+            return firstPart;
         }
 
     }
