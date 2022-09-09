@@ -852,6 +852,39 @@ namespace EdabitChalanges
             return firstPart;
         }
 
+        //https://www.hackerrank.com/challenges/three-month-preparation-kit-detect-whether-a-linked-list-contains-a-cycle/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-eight&h_r=next-challenge&h_v=zen
+        static bool hasCycle(SinglyLinkedListNode head)
+        {
+            Dictionary<SinglyLinkedListNode, bool> hash = new Dictionary<SinglyLinkedListNode, bool>();
+            SinglyLinkedListNode cur = head;
+            while (cur.next != null)
+            {
+                if (hash.ContainsKey(cur))
+                    return true;
+
+                hash.Add(cur, false);
+                cur = cur.next;
+            }
+
+            return false;
+        }
+
+        //https://www.hackerrank.com/challenges/three-month-preparation-kit-icecream-parlor/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-eight
+        public static List<int> IcecreamParlor(int m, List<int> arr)
+        {
+            var hash = new Dictionary<int, int>();
+
+            for (int i = 0; i < arr.Count; i++)
+            {
+                var dif = m - arr[i];
+                if (hash.ContainsKey(arr[i]))
+                    return new List<int> { hash[arr[i]] + 1, i + 1 };
+                else hash.Add(dif, i);
+            }
+
+            return new List<int> { 1 };
+        }
+
     }
 }
 

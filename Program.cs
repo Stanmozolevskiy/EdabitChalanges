@@ -10,7 +10,7 @@ namespace EdabitChalanges
     {
         static void Main(string[] args)
         {
-           Console.WriteLine(HackerRank.ClimbingLeaderboard(new List<int> { 100, 100, 50, 40, 40, 20, 10 }, new List<int> { 5, 25, 50, 120 }));
+           Console.WriteLine(HackerRank.IcecreamParlor(200, new List<int> { 150, 24, 79, 50, 88, 345, 3 }));
         }
     }
 
