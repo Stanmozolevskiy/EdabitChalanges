@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace EdabitChalanges
 {
-    public class HackerRank
+    public partial class HackerRank
     {
         //https://www.hackerrank.com/challenges/three-month-preparation-kit-mini-max-sum/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-one
         public static string miniMaxSum(List<int> arr)
@@ -529,11 +529,6 @@ namespace EdabitChalanges
             current = prev;
             return current;
         }
-        public class SinglyLinkedListNode
-        {
-            public int data;
-            public SinglyLinkedListNode next;
-        }
 
         public static string BalancedSums(List<int> arr)
         {
@@ -761,13 +756,6 @@ namespace EdabitChalanges
 
             return results;
         }
-        
-        public class DoublyLinkedListNode
-        {
-            public int data;
-            public DoublyLinkedListNode next;
-            public DoublyLinkedListNode prev;
-        }
        
 
         //https://www.hackerrank.com/challenges/three-month-preparation-kit-reverse-a-doubly-linked-list/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-seven
@@ -883,6 +871,41 @@ namespace EdabitChalanges
             }
 
             return new List<int> { 1 };
+        }
+
+        //https://www.hackerrank.com/challenges/three-month-preparation-kit-insert-a-node-into-a-sorted-doubly-linked-list/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-eight&h_r=next-challenge&h_v=zen
+        public static DoublyLinkedListNode sortedInsert(DoublyLinkedListNode llist, int data)
+        {
+            DoublyLinkedListNode newNode = new DoublyLinkedListNode(data);
+            if (llist.next == null) return llist;
+
+            if (llist.data >= data)
+            {
+                llist.prev = newNode;
+                newNode.next = llist;
+                return newNode;
+            }
+
+            DoublyLinkedListNode cur = llist;
+            while (llist != null)
+            {
+                if (cur.data >= data)
+                {
+                    cur.prev.next = newNode;
+                    newNode.prev = cur.prev;
+                    cur.prev = newNode;
+                    newNode.next = cur;
+                    break;
+                }
+                else if (cur.next == null)
+                {
+                    cur.next = newNode;
+                    newNode.prev = cur;
+                    break;
+                }
+                cur = cur.next;
+            }
+            return llist;
         }
 
     }
