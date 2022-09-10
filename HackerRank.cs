@@ -859,7 +859,7 @@ namespace EdabitChalanges
 
         //https://www.hackerrank.com/challenges/three-month-preparation-kit-icecream-parlor/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-eight
         public static List<int> IcecreamParlor(int m, List<int> arr)
-        {
+         {
             var hash = new Dictionary<int, int>();
 
             for (int i = 0; i < arr.Count; i++)
