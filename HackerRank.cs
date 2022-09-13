@@ -908,47 +908,51 @@ namespace EdabitChalanges
             return llist;
         }
 
-        //https://www.hackerrank.com/challenges/three-month-preparation-kit-queue-using-two-stacks/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-eight&h_r=next-challenge&h_v=zen&h_r=next-challenge&h_v=zen
-        public class QueueUsingTwoStacks
+        //https://www.hackerrank.com/challenges/three-month-preparation-kit-sherlock-and-anagrams/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-eight
+        public static int SherlockAndAnagrams(string s)
         {
-            private List<int> s1;
-            private List<int> s2;
-            public QueueUsingTwoStacks()
-            {
-                s1 = new List<int>();
-                s2 = new List<int>();
-            }
+            Dictionary<string, int> hash = new Dictionary<string, int>();
+            int length = 1;
 
-            public void Enqueue(int val)
+            for (int i = 0; +i < s.Length; i++)
             {
-                s1.Add(val);
-            }
-
-            public void Dequeue()
-            {
-                shift();
-                s2.Remove(s2.Count - 1);
-            }
-
-            public int Peak()
-            {
-                shift();
-                return s2[s2.Count - 1];
-            }
-
-            private void shift()
-            {
-                if (s2.Count == 0)
-                foreach(int item in s1)
+                for (int j = 0; (j + i + 1) <= s.Length; j++)
                 {
-                    s2.Add(item);
-                    s1.Remove(item);
+                    string pattern = string.Join("", s.Substring(j, i + 1)
+                                            .ToCharArray()
+                                            .OrderBy(x => x));
+                    if (hash.ContainsKey(pattern))
+                        hash[pattern]++;
+                    else hash.Add(pattern, 1);
                 }
+                length++;
             }
+
+            int anagramParirs = 0;
+            foreach(var k in hash)
+            {
+                int v = k.Value;
+                anagramParirs += (v * (v - 1)) / 2;
+            }
+
+            return anagramParirs;
         }
 
+        public static string SuperReducedString(string s)
+        {
+            if (s.Length <= 1) return s;
+            Stack<char> stack = new Stack<char>();
+            for (int i = 0; i < s.Length; i++)
+                if (stack.Count == 0)
+                    stack.Push(s[i]);
 
+                else if(stack.Peek() == s[i])
+                    stack.Pop();
 
+                else stack.Push(s[i]);
+          
+            return stack.Count == 0 ? "Empty String" : string.Join("", stack.Reverse().Select(x => x));
+        }
     }
 }
 
